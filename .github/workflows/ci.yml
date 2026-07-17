@@ -25,7 +25,9 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-      - name: Adversarial rate-limit tests
+      - name: Adversarial tests
         run: npm run test:rate-limit
+      - name: Generate sealed verification packet
+        run: npm run verify:demo
       - name: Production build
         run: npm run build
