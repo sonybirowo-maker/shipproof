@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { createReleasePacket } from "../lib/proof-engine.mjs";
+import { createReleasePacket, parseNodeTestSummary } from "../lib/proof-engine.mjs";
 
 const root = process.cwd();
 const config = JSON.parse(await readFile(path.join(root, "shipproof.config.json"), "utf8"));
@@ -17,15 +17,11 @@ try {
   output = `${error.stdout || ""}\n${error.stderr || ""}`.trim();
 }
 
-const match = output.match(/ℹ tests (\d+)/);
-const passedMatch = output.match(/ℹ pass (\d+)/);
-const failedMatch = output.match(/ℹ fail (\d+)/);
+const summary = parseNodeTestSummary(output);
 const verification = {
   command: config.verification.command,
-  passed: passed && Number(failedMatch?.[1] || 0) === 0 && Number(passedMatch?.[1] || 0) >= config.verification.minimum_tests,
-  tests: Number(match?.[1] || 0),
-  passed_tests: Number(passedMatch?.[1] || 0),
-  failed_tests: Number(failedMatch?.[1] || 0),
+  passed: passed && summary.failed_tests === 0 && summary.passed_tests >= config.verification.minimum_tests,
+  ...summary,
 };
 
 const packet = await createReleasePacket({ root, config, verification });

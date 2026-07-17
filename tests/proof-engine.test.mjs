@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { createReleasePacket, sha256File } from "../lib/proof-engine.mjs";
+import { createReleasePacket, parseNodeTestSummary, sha256File } from "../lib/proof-engine.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const config = JSON.parse(await readFile(path.join(root, "shipproof.config.json"), "utf8"));
@@ -13,6 +13,16 @@ test("hashes evidence artifacts with SHA-256", async () => {
 });
 
 test("creates a sealed packet from passing verification", async () => {
+  assert.deepEqual(parseNodeTestSummary("ℹ tests 4\nℹ pass 4\nℹ fail 0\n"), {
+    tests: 4,
+    passed_tests: 4,
+    failed_tests: 0,
+  });
+  assert.deepEqual(parseNodeTestSummary("# tests 4\n# pass 4\n# fail 0\n"), {
+    tests: 4,
+    passed_tests: 4,
+    failed_tests: 0,
+  });
   const packet = await createReleasePacket({ root, config, verification: { passed: true, tests: 4, passed_tests: 4, failed_tests: 0 } });
   assert.equal(packet.gates.adversarial_qa, "PASS");
   assert.equal(packet.gates.human_approval, "REQUIRED");
