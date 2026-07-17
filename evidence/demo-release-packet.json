@@ -1,0 +1,13 @@
+{
+  "schema": "shipproof.release-packet.v1",
+  "mission": "Protect the login API",
+  "verdict": "APPROVED_FOR_RELEASE",
+  "confidence": 100,
+  "evidence": [
+    { "id": "REQ-1024", "type": "requirement", "result": "VERIFIED" },
+    { "id": "DIF-7F3B2C1", "type": "diff", "result": "VERIFIED" },
+    { "id": "TST-9C1A7E8", "type": "adversarial_test", "result": "PASSED" }
+  ],
+  "gates": { "contract": "PASS", "build": "PASS", "adversarial_qa": "PASS", "human_approval": "APPROVED" },
+  "integrity": { "algorithm": "SHA-256", "status": "DEMO_SEALED" }
+}
