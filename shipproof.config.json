@@ -1,0 +1,14 @@
+{
+  "schema": "shipproof.config.v1",
+  "mission": {
+    "id": "MIS-001",
+    "title": "Protect the login API",
+    "requirement": "Allow five login attempts per minute per normalized identity and reject excess attempts without blocking valid sessions."
+  },
+  "artifacts": [
+    { "id": "DIF-7F3B2C1", "type": "implementation", "path": "lib/rate-limit.mjs" },
+    { "id": "TST-9C1A7E8", "type": "adversarial_test", "path": "tests/rate-limit.test.mjs" }
+  ],
+  "verification": { "command": "node --test tests/rate-limit.test.mjs", "minimum_tests": 4 },
+  "approval": { "required": true }
+}
