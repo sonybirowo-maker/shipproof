@@ -18,7 +18,7 @@ Target duration: **2:45**. Language: English. Record at 1080p with the full proo
 
 **Action:** Click **Run verification**.
 
-> This mission protects a login API with identity-aware rate limiting. Codex creates the implementation. Adversarial QA then attacks it by rotating IP addresses while keeping the same account identity. ShipProof exposes the bypass risk, verifies the remediation, and links every result into one proof graph.
+> This mission protects a login API with identity-aware rate limiting. The Codex-authored implementation applies identity-aware rate limiting. Adversarial QA then attacks it by rotating IP addresses while keeping the same account identity. ShipProof exposes the bypass risk, verifies the remediation, and links every result into one proof graph.
 
 Pause briefly on the risk state, then let confidence reach 94%.
 
@@ -32,13 +32,13 @@ Pause briefly on the risk state, then let confidence reach 94%.
 
 **Visual:** Terminal running `npm run verify:demo`, followed by the JSON packet.
 
-> Under the interface, this is executable—not a confidence animation. The CLI runs adversarial tests, records actual pass and fail counts, hashes the implementation and test files, fails closed on errors, and creates a machine-readable packet with a SHA-256 integrity seal.
+> Under the interface, this is executable—not a confidence animation. The full project gate passes eight checks, including four adversarial rate-limit checks. The CLI records actual pass and fail counts, hashes the implementation and test files, fails closed on errors, and creates a machine-readable packet with a SHA-256 integrity seal.
 
 ## 2:18–2:38 — Codex and GPT-5.6
 
 **Visual:** Repository and commit history.
 
-> I built ShipProof as a solo founder with GPT-5.6 and Codex: product strategy, architecture, UI implementation, adversarial testing, browser QA, deployment, GitHub automation, and recovery from a real infrastructure failure—all in one traceable Build Week session.
+> I built ShipProof as a solo founder with GPT-5.6 and Codex: product strategy, architecture, UI implementation, adversarial testing, browser QA, deployment, GitHub automation, and recovery from a real infrastructure failure—through a traceable Build Week workflow.
 
 ## 2:38–2:45 — Close
 
