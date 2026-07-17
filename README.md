@@ -6,7 +6,7 @@ ShipProof is an evidence-native developer tool built for OpenAI Build Week 2026.
 
 ## Working demo
 
-[Open the hosted demo](https://shipproof-demo.dtc-dawah-id.chatgpt.site), select **Run verification**, observe the adversarial QA stage, then approve and download the release packet.
+Open the hosted demo, select **Run verification**, observe the adversarial QA stage, then approve and download the release packet.
 
 ## Why it exists
 
@@ -21,6 +21,8 @@ AI coding agents make code faster, but engineering teams still need to answer: W
 - Downloadable JSON release packet
 - Identity-aware sample login rate limiter
 - Adversarial test proving rotating IPs cannot bypass an account limit
+- CLI verification engine that executes tests and hashes evidence artifacts
+- Fail-closed release packet with a SHA-256 integrity seal
 - Responsive and reduced-motion-aware interface
 
 ## Run locally
@@ -38,9 +40,12 @@ Then open the local URL printed by Vite.
 
 ```bash
 node --test tests/rate-limit.test.mjs
+npm run verify:demo
 npm run lint
 npm run build
 ```
+
+`npm run verify:demo` runs the adversarial suite and creates `artifacts/release-packet.json` from actual test results and file hashes. It exits non-zero when verification fails.
 
 ## Codex and GPT-5.6 collaboration
 
@@ -59,6 +64,8 @@ The Build Week contribution began after July 13, 2026. Commit history and the su
 - `app/page.tsx` — interactive product experience
 - `app/globals.css` — responsive visual system
 - `lib/rate-limit.mjs` — sample identity-aware rate limiter
+- `lib/proof-engine.mjs` — evidence hashing and fail-closed packet generation
+- `scripts/shipproof-verify.mjs` — runnable verification CLI
 - `tests/rate-limit.test.mjs` — functional and adversarial tests
 - `evidence/demo-release-packet.json` — machine-readable example attestation
 
