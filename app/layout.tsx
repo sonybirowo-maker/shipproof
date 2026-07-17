@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Starter Project",
-  description: "A clean starting point for building your site.",
+  title: "ShipProof — Evidence-native releases",
+  description:
+    "Verify AI-generated code with adversarial tests, artifact hashes, human approval, and a sealed release packet.",
   other: {
     "codex-preview": "development",
   },

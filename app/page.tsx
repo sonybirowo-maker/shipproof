@@ -6,7 +6,7 @@ const stages = ["Contract", "Build", "Adversarial QA", "Approval", "Release"];
 const evidence = [
   { type: "Requirement", id: "REQ-1024", title: "Protect the login API", body: "Allow five attempts per minute per identity. Reject excess attempts with HTTP 429 without blocking valid sessions.", meta: "3 acceptance criteria" },
   { type: "Codex patch", id: "DIF-7F3B2C1", title: "Token-bucket middleware", body: "Adds identity-aware rate limiting, retry headers, and an injectable clock for deterministic verification.", meta: "+128 −14 · 4 files" },
-  { type: "Adversarial test", id: "TST-9C1A7E8", title: "Rotating-IP bypass", body: "Proves an attacker cannot reset the limit by changing IP while preserving the same normalized account identity.", meta: "12/12 passed" },
+  { type: "Adversarial test", id: "TST-9C1A7E8", title: "Rotating-IP bypass", body: "Proves an attacker cannot reset the limit by changing IP while preserving the same normalized account identity.", meta: "4/4 adversarial checks" },
 ];
 
 export default function Home() {
@@ -81,7 +81,7 @@ export default function Home() {
           <section className="gate"><strong>HUMAN CONTROL GATE</strong><button disabled={phase < 3 || approved} onClick={() => { setApproved(true); setPhase(4); }}>{approved ? "✓ Release approved" : "Approve release"}</button><small>{phase < 3 ? "Unlocks after evidence verification" : approved ? "Release packet ready" : "All automated gates passed"}</small></section>
         </aside>
       </section>
-      <footer><div><i className={phase === 2 ? "bad" : "good"} /><b>{["Contract ready", "Codex patch created", "Bypass found", "All evidence verified", "Release packet sealed"][phase]}</b><span> · {phase >= 3 ? "12 tests passed · 0 unresolved risks" : "Proof run DEMO-001"}</span></div><div><button onClick={reset}>Reset demo</button><button disabled={!approved} onClick={downloadPacket}>Download release packet ↓</button></div></footer>
+      <footer><div><i className={phase === 2 ? "bad" : "good"} /><b>{["Contract ready", "Codex patch created", "Bypass found", "All evidence verified", "Release packet sealed"][phase]}</b><span> · {phase >= 3 ? "8 checks passed · 0 unresolved risks" : "Proof run DEMO-001"}</span></div><div><button onClick={reset}>Reset demo</button><button disabled={!approved} onClick={downloadPacket}>Download release packet ↓</button></div></footer>
     </main>
   );
 }
